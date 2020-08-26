@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+//apply plugin: 'com.alibaba.arouter'
+android {
+
+    compileSdkVersion rootProject.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        //ARouter配置
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    //占位主工程自己源码库
+    compileOnly project(path: ':lib_network')
+    compileOnly project(path: ':lib_common_ui')
+    compileOnly project(path: ':lib_image_loader')
+    compileOnly project(path: ':lib_base')
+
+
+    //占位主工程android原生库
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.design
+    compileOnly rootProject.depsLibs.recyclerview
+
+    //占位主工程类库
+    compileOnly rootProject.depsLibs.greendao
+    compileOnly rootProject.depsLibs.eventbus
+    compileOnly rootProject.depsLibs.rxjava
+
+    compileOnly rootProject.depsLibs.fontawesome
+    compileOnly rootProject.depsLibs.ionicons
+    //占位主工程arouter库
+//    compileOnly(rootProject.depsLibs.arouterapi) {
+//        exclude group: 'com.android.support'
+//    }
+//    annotationProcessor rootProject.depsLibs.aroutercompiler
+}
+
+greendao {
+    //其它配置保持默认,有需要再研究
+    schemaVersion 1 //数据库版本号
+    daoPackage 'com.gentek.lib_audio.mediaplayer.db' //dao,master类所在包
+}

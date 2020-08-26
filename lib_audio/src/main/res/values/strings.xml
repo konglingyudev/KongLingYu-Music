@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">lib_audio</string>
+
+    <string name="play_icon">{icon-play}</string>
+    <string name="pause_icon">{icon-pause}</string>
+
+    <string name="play_icon_a">{icon-play-a}</string>
+    <string name="pause_icon_a">{icon-pause-a}</string>
+    <string name="list_icon_a">{icon-list-a}</string>
+
+
+    <string name="icon_single_loop">{icon-single-loop}</string>
+    <string name="icon_list_loop">{icon-list-loop}</string>
+    <string name="icon_random_loop">{icon-random-loop}</string>
+
+    <string name="icon_collection">{icon-collection}</string>
+    <string name="icon_delete">{icon-delete}</string>
+
+
+</resources>

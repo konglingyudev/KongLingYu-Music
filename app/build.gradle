@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId rootProject.android.applicationId
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+        multiDexEnabled rootProject.android.multiDexEnabled
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Butterknife requires Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation rootProject.depsLibs.appcompat
+    implementation rootProject.depsLibs.constraintlayout
+    implementation rootProject.depsLibs.design
+
+    //greendao类库依赖
+    implementation rootProject.depsLibs.greendao
+    implementation rootProject.depsLibs.butterknife
+    annotationProcessor rootProject.depsLibs.butterknife_compiler
+    //eventbus类库依赖
+    implementation rootProject.depsLibs.eventbus
+    //字体图标库
+    implementation rootProject.depsLibs.fontawesome
+    implementation rootProject.depsLibs.ionicons
+    //rxjava库
+    implementation rootProject.depsLibs.rxjava
+    implementation rootProject.depsLibs.rxandroid
+
+    implementation project(path: ':lib_network')
+    implementation project(path: ':lib_image_loader')
+    implementation project(path: ':lib_audio')
+    implementation project(path: ':lib_common_ui')
+}
