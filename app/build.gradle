@@ -40,6 +40,7 @@ dependencies {
     //greendao类库依赖
     implementation rootProject.depsLibs.greendao
     implementation rootProject.depsLibs.butterknife
+    implementation project(path: ':lib_pullalive')
     annotationProcessor rootProject.depsLibs.butterknife_compiler
     //eventbus类库依赖
     implementation rootProject.depsLibs.eventbus

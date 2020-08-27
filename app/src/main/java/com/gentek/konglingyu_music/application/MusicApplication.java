@@ -36,5 +36,8 @@ public class MusicApplication extends Application {
     public static MusicApplication getInstance() {
         return mApplication;
     }
+    public static Context getContext() {
+        return mContext;
+    }
 
 }

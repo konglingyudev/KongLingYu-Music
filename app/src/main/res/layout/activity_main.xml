@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.activity.HomeActivity"
     android:background="#EEffffff"
-    >
+    android:orientation="vertical"
+    tools:context=".ui.activity.HomeActivity">
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magic_indicator"
@@ -22,8 +21,7 @@
             android:id="@+id/view_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/bottom_view"
-            />
+            android:layout_above="@id/bottom_view" />
 
         <com.gentek.lib_audio.mediaplayer.view.BottomMusicView
             android:id="@+id/bottom_view"

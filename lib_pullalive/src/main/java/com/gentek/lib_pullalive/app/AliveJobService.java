@@ -20,14 +20,14 @@ import android.util.Log;
 public class AliveJobService extends JobService {
     private static final String TAG = AliveJobService.class.getName();
 
-    private JobScheduler mJobScheduler;
+    private JobScheduler mJobScheduler;// 调度类
 
     private Handler mJobHandler = new Handler(new Handler.Callback() {
 
         @Override
         public boolean handleMessage(Message msg) {
             Log.d(TAG, "pull alive.");
-            jobFinished((JobParameters) msg.obj, false);
+            jobFinished((JobParameters) msg.obj, true);
             return true;
         }
     });
@@ -48,8 +48,9 @@ public class AliveJobService extends JobService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         JobInfo job = initJobInfo(startId);
+        // 提交自己的job到system process中
         if (mJobScheduler.schedule(job) <= 0) {
-            Log.d(TAG, "AliveJobService failed");
+            Log.d(TAG, "AliveJobService failed");// 启动失败
         } else {
             Log.d(TAG, "AliveJobService success");
         }
@@ -74,17 +75,18 @@ public class AliveJobService extends JobService {
     private JobInfo initJobInfo(int startId) {
         JobInfo.Builder builder = new JobInfo.Builder(startId,
                 new ComponentName(getPackageName(), AliveJobService.class.getName()));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//版本大于24
             builder.setMinimumLatency(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS); //执行的最小延迟时间
             builder.setOverrideDeadline(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS);  //执行的最长延时时间
             builder.setBackoffCriteria(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS,
                     JobInfo.BACKOFF_POLICY_LINEAR);//线性重试方案
-        } else {
+        } else {// 24以下
             builder.setPeriodic(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS);
         }
-        builder.setPersisted(false);
-        builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_NONE);
-        builder.setRequiresCharging(false);
+        // 至少要提交一个条件，不然系统不知道什么情况要调用，所以会调度失败
+        builder.setPersisted(false);// 持久，音乐关闭就关闭
+        builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_NONE);// 网络条件  任何一个网络
+        builder.setRequiresCharging(true);// 充电的时候是否执行
         return builder.build();
     }
 }

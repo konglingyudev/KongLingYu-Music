@@ -1,5 +1,6 @@
 package com.gentek.konglingyu_music.ui.fragment;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.gentek.konglingyu_music.api.RequestCenter;
 import com.gentek.konglingyu_music.application.MusicApplication;
 import com.gentek.konglingyu_music.bean.SongListBean;
 import com.gentek.lib_audio.app.AudioHelper;
+import com.gentek.lib_audio.mediaplayer.core.MusicService;
 import com.gentek.lib_audio.mediaplayer.model.SongBean;
 import com.gentek.lib_audio.mediaplayer.view.BottomMusicView;
 import com.gentek.lib_network.listener.DisposeDataListener;
@@ -26,6 +28,8 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class HotSongFragment extends Fragment {
 
@@ -151,4 +155,6 @@ public class HotSongFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //发请求更新UI
     }
+
+
 }

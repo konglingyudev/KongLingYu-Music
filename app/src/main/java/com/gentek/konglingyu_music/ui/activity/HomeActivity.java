@@ -22,6 +22,7 @@ import com.gentek.konglingyu_music.enum_entity.CHANNEL;
 import com.gentek.lib_common_ui.base.BaseActivity;
 import com.gentek.lib_common_ui.pager_indictor.ScaleTransitionPagerTitleView;
 import com.gentek.lib_image_loader.app.ImageLoaderManager;
+import com.gentek.lib_pullalive.app.AliveJobService;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -45,24 +46,17 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pullAliveService();
         ButterKnife.bind(this);
 
         initView();
         
-        initData();
-        
+
     }
 
-    private void initData() {
-        DisplayMetrics metric = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels;  // 屏幕宽度（像素）
-        int height = metric.heightPixels;  // 屏幕高度（像素）
-        float density = metric.density;  // 屏幕密度（0.75 / 1.0 / 1.5，小米4的是3.0）
-        int densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240,小米4的是480）
-        Log.d("dpi","densityDpi="+densityDpi);
+    private void pullAliveService(){
+        AliveJobService.start(this);
     }
-
     private void initView() {
         mAdapter = new ExamplePagerAdapter(getSupportFragmentManager(), CHANNELS);
         mViewPage.setAdapter(mAdapter);

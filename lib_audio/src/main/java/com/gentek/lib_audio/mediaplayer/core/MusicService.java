@@ -53,6 +53,12 @@ public class MusicService extends Service implements NotificationHelper.Notifica
         AudioHelper.getContext().startService(intent);
     }
 
+    public static  void stopMusicService(){
+        //关闭服务
+        Intent intent = new Intent(AudioHelper.getContext(), MusicService.class);
+        AudioHelper.getContext().stopService(intent);
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
